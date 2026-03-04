@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>আমার প্রথম অ্যাপ-সাইট</title>
+    <title>আমার স্টাইলিশ সাইট ও ঘড়ি</title>
     <style>
         body {
             margin: 0;
@@ -11,50 +11,82 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: #f0f2f5;
-            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            font-family: 'Segoe UI', sans-serif;
+            color: white;
         }
-        .card {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 30px;
             text-align: center;
-            width: 300px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.2);
+            width: 320px;
         }
-        h1 { color: #1c1e21; }
+        /* ডিজিটাল ঘড়ির স্টাইল */
+        #clock {
+            font-size: 40px;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #00d2ff;
+            text-shadow: 0 0 20px rgba(0,210,255,0.6);
+        }
+        h1 { font-size: 26px; margin-bottom: 5px; }
+        p { opacity: 0.8; margin-bottom: 25px; }
+
         .fb-btn {
             display: block;
-            background-color: #1877F2;
+            background: #1877F2;
             color: white;
             text-decoration: none;
-            padding: 12px;
-            border-radius: 8px;
+            padding: 15px;
+            border-radius: 50px;
             font-weight: bold;
-            cursor: pointer;
-            border: none;
-            width: 100%;
-            font-size: 16px;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(24, 119, 242, 0.4);
+        }
+        .fb-btn:hover {
+            transform: scale(1.05);
+            background: #166fe5;
         }
     </style>
 </head>
 <body>
 
-    <div class="card">
+    <div class="container">
         <h1>স্বাগতম! 🚀</h1>
-        <p>এটি আমার প্রথম ছোট অ্যাপ প্রজেক্ট।</p>
         
-        <button onclick="myFunction()" class="fb-btn">
-            ফেসবুক প্রোফাইল দেখুন
-        </button>
+        <div id="clock">00:00:00</div>
+        
+        <p>আসসালামুয়ালাইকুম, এটি আমার সাইট।</p>
+        
+        <a href="https://www.facebook.com/chill.r.527967" class="fb-btn">
+            আমার ফেসবুক প্রোফাইল
+        </a>
     </div>
 
     <script>
-        // এটিই জাভাস্ক্রিপ্ট যা অ্যাপের মতো কাজ করে
-        function myFunction() {
-            alert("আপনি এখন আমার ফেসবুক প্রোফাইলে যাচ্ছেন! ধন্যবাদ।");
-            window.location.href = "https://www.facebook.com/chill.r.527967";
+        // ঘড়ি চালানোর জাভাস্ক্রিপ্ট
+        function updateClock() {
+            const now = new Date();
+            let h = now.getHours();
+            let m = now.getMinutes();
+            let s = now.getSeconds();
+            
+            // ০ যোগ করার জন্য (যেমন: 05)
+            h = h < 10 ? "0" + h : h;
+            m = m < 10 ? "0" + m : m;
+            s = s < 10 ? "0" + s : s;
+            
+            const timeString = h + ":" + m + ":" + s;
+            document.getElementById("clock").innerText = timeString;
         }
+
+        // প্রতি সেকেন্ডে ঘড়ি আপডেট হবে
+        setInterval(updateClock, 1000);
+        updateClock(); // পেজ লোড হওয়ার সাথে সাথে শুরু হবে
     </script>
 
 </body>
