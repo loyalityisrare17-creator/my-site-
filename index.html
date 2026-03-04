@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>আমার প্রোফাইল</title>
+    <title>আমার প্রথম অ্যাপ-সাইট</title>
     <style>
         body {
             margin: 0;
@@ -11,34 +11,30 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: linear-gradient(135deg, #1877F2, #004a99); /* ফেসবুকের থিম কালার */
-            font-family: sans-serif;
+            background: #f0f2f5;
+            font-family: Arial, sans-serif;
         }
         .card {
             background: white;
             padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             text-align: center;
-            width: 280px;
+            width: 300px;
         }
-        h1 { color: #333; font-size: 24px; }
-        p { color: #666; margin-bottom: 20px; }
-        
-        /* ফেসবুক বাটন স্টাইল */
+        h1 { color: #1c1e21; }
         .fb-btn {
             display: block;
             background-color: #1877F2;
             color: white;
             text-decoration: none;
             padding: 12px;
-            border-radius: 10px;
+            border-radius: 8px;
             font-weight: bold;
-            transition: 0.3s;
-        }
-        .fb-btn:hover {
-            background-color: #145dbf;
-            transform: translateY(-3px);
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            font-size: 16px;
         }
     </style>
 </head>
@@ -46,12 +42,20 @@
 
     <div class="card">
         <h1>স্বাগতম! 🚀</h1>
-        <p>আসসালামুয়ালাইকুম। এটি আমার ওয়েবসাইট।</p>
+        <p>এটি আমার প্রথম ছোট অ্যাপ প্রজেক্ট।</p>
         
-        <a href="https://www.facebook.com/chill.r.527967" target="_blank" class="fb-btn">
-            আমার ফেসবুক প্রোফাইল
-        </a>
+        <button onclick="myFunction()" class="fb-btn">
+            ফেসবুক প্রোফাইল দেখুন
+        </button>
     </div>
+
+    <script>
+        // এটিই জাভাস্ক্রিপ্ট যা অ্যাপের মতো কাজ করে
+        function myFunction() {
+            alert("আপনি এখন আমার ফেসবুক প্রোফাইলে যাচ্ছেন! ধন্যবাদ।");
+            window.location.href = "https://www.facebook.com/chill.r.527967";
+        }
+    </script>
 
 </body>
 </html>
