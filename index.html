@@ -3,90 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>আমার স্টাইলিশ সাইট ও ঘড়ি</title>
+    <title>প্রফেশনাল পোর্টফোলিও</title>
     <style>
+        /* ব্যাকগ্রাউন্ড স্টাইল */
         body {
             margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(45deg, #0f2027, #203a43, #2c5364); /* আধুনিক ডার্ক গ্রেডিয়েন্ট */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: white;
         }
-        .container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
-            padding: 40px;
-            border-radius: 30px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,255,255,0.2);
-            width: 320px;
-        }
-        /* ডিজিটাল ঘড়ির স্টাইল */
-        #clock {
-            font-size: 40px;
-            font-weight: bold;
-            margin: 20px 0;
-            color: #00d2ff;
-            text-shadow: 0 0 20px rgba(0,210,255,0.6);
-        }
-        h1 { font-size: 26px; margin-bottom: 5px; }
-        p { opacity: 0.8; margin-bottom: 25px; }
 
+        /* প্রফেশনাল কার্ড */
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            width: 85%;
+            max-width: 350px;
+        }
+
+        /* ডিজিটাল ঘড়ি */
+        #clock {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #00d2ff;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
+        }
+
+        h1 { font-size: 24px; margin-top: 10px; }
+        p { opacity: 0.7; font-size: 16px; margin-bottom: 30px; }
+
+        /* ফেসবুক বাটন */
         .fb-btn {
-            display: block;
+            display: inline-block;
             background: #1877F2;
             color: white;
             text-decoration: none;
-            padding: 15px;
+            padding: 15px 30px;
             border-radius: 50px;
             font-weight: bold;
-            transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(24, 119, 242, 0.4);
+            font-size: 18px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(24, 119, 242, 0.3);
         }
+
         .fb-btn:hover {
-            transform: scale(1.05);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(24, 119, 242, 0.5);
             background: #166fe5;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>স্বাগতম! 🚀</h1>
-        
+    <div class="card">
         <div id="clock">00:00:00</div>
+        <h1>আসসালামুয়ালাইকুম! 🚀</h1>
+        <p>এটি আমার প্রফেশনাল ওয়েবসাইট</p>
         
-        <p>আসসালামুয়ালাইকুম, এটি আমার সাইট।</p>
-        
-        <a href="https://www.facebook.com/chill.r.527967" class="fb-btn">
-            আমার ফেসবুক প্রোফাইল
+        <a href="https://www.facebook.com/chill.r.527967" target="_blank" class="fb-btn">
+            Facebook Profile
         </a>
     </div>
 
     <script>
-        // ঘড়ি চালানোর জাভাস্ক্রিপ্ট
+        // ডিজিটাল ঘড়ির লজিক
         function updateClock() {
             const now = new Date();
-            let h = now.getHours();
-            let m = now.getMinutes();
-            let s = now.getSeconds();
-            
-            // ০ যোগ করার জন্য (যেমন: 05)
-            h = h < 10 ? "0" + h : h;
-            m = m < 10 ? "0" + m : m;
-            s = s < 10 ? "0" + s : s;
-            
-            const timeString = h + ":" + m + ":" + s;
-            document.getElementById("clock").innerText = timeString;
+            let h = now.getHours().toString().padStart(2, '0');
+            let m = now.getMinutes().toString().padStart(2, '0');
+            let s = now.getSeconds().toString().padStart(2, '0');
+            document.getElementById('clock').textContent = `${h}:${m}:${s}`;
         }
-
-        // প্রতি সেকেন্ডে ঘড়ি আপডেট হবে
         setInterval(updateClock, 1000);
-        updateClock(); // পেজ লোড হওয়ার সাথে সাথে শুরু হবে
+        updateClock();
     </script>
 
 </body>
