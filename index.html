@@ -1,18 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="bn">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>আমার ওয়েবসাইট</title>
+    <title>আমার স্টাইলিশ ওয়েবসাইট</title>
     <style>
-        body { font-family: sans-serif; background-color: #f0f2f5; text-align: center; padding: 50px; }
-        h1 { color: #007bff; }
-        .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        /* পুরো পেজের ব্যাকগ্রাউন্ড */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* সুন্দর কালার গ্রেডিয়েন্ট */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* মাঝখানের স্টাইলিশ কার্ড */
+        .card {
+            background: rgba(255, 255, 255, 0.2); /* গ্লাস ইফেক্ট */
+            backdrop-filter: blur(10px); /* ঝাপসা ব্যাকগ্রাউন্ড */
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            text-align: center;
+            color: white;
+            max-width: 300px;
+            animation: fadeIn 1.5s ease-in-out; /* আসার সময় অ্যানিমেশন */
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* এনিমেশন কোড */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
+
     <div class="card">
         <h1>স্বাগতম! 🚀</h1>
-        <p> আসসালামুয়ালাইকুম</p></p>
+        <p>আসসালামুয়ালাইকুম</p>
+        <p style="font-size: 0.9rem; margin-top: 20px;">আমি এটি মোবাইল দিয়ে ডিজাইন করেছি।</p>
     </div>
+
 </body>
 </html>
