@@ -3,103 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minhaj | Pro Portfolio</title>
+    <title>Minhaj | Pro Private Site</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { background: #0f172a; color: white; font-family: 'Segoe UI', sans-serif; }
+        body { background: #0f172a; color: white; }
         .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); }
-        .admin-only { display: none; } /* শুরুতে আপলোড বক্স লুকিয়ে থাকবে */
-        .gradient-btn { background: linear-gradient(90deg, #00d4ff, #007aff); transition: 0.3s; }
-        .gradient-btn:hover { opacity: 0.9; transform: scale(1.02); }
+        #adminPanel { display: none; }
     </style>
 </head>
-<body class="p-4 md:p-8 pb-20">
+<body class="p-4 md:p-8">
 
-    <div class="max-w-xl mx-auto glass p-8 rounded-3xl text-center shadow-2xl animate-fade">
-        <div class="w-28 h-28 mx-auto rounded-full border-4 border-cyan-500 p-1 mb-4 overflow-hidden shadow-lg">
-            <img id="profilePreview" src="https://ui-avatars.com/api/?name=Minhaj&background=00d4ff&color=fff" class="w-full h-full object-cover rounded-full">
+    <div class="max-w-xl mx-auto glass p-6 rounded-3xl text-center shadow-2xl">
+        <div class="w-24 h-24 mx-auto rounded-full border-4 border-cyan-500 mb-4 overflow-hidden">
+            <img src="https://ui-avatars.com/api/?name=Minhaj&background=00d4ff&color=fff" class="w-full h-full object-cover">
         </div>
-        <h2 id="userName" class="text-3xl font-bold mb-1">Minhaj</h2>
-        <p id="userBio" class="text-gray-400 text-sm mb-6 px-4">এখন আর কতটুকু চিনো?? সময় আসতে দাও আরো চিনবা 🥷</p>
-        
-        <a href="https://www.facebook.com/chill.r.527967" target="_blank" class="inline-flex items-center bg-slate-800 hover:bg-slate-700 px-5 py-2 rounded-full text-sm mb-6 transition">
-            <i class="fab fa-facebook text-blue-500 mr-2"></i> Facebook Profile
-        </a>
+        <h2 class="text-2xl font-bold">Minhaj</h2>
+        <p class="text-gray-400 text-sm mt-2">সময় আসতে দাও আরো চিনবা 🥷</p>
+        <button onclick="checkAdmin()" class="text-[10px] text-gray-600 mt-4 block mx-auto">ADMIN ACCESS</button>
+    </div>
 
-        <div class="mt-4">
-            <button onclick="checkAdmin()" class="text-[10px] text-gray-600 hover:text-cyan-500 uppercase tracking-widest">Admin Access</button>
+    <div id="adminPanel" class="max-w-xl mx-auto mt-6 glass p-6 rounded-3xl border-2 border-dashed border-cyan-500/30">
+        <h3 class="text-center text-cyan-400 font-bold mb-4">UPLOAD PANEL</h3>
+        <input type="file" id="fileInput" class="hidden" onchange="processFile(this)">
+        <div class="grid grid-cols-2 gap-4">
+            <button onclick="document.getElementById('fileInput').click()" class="bg-slate-800 p-4 rounded-xl hover:bg-slate-700">
+                <i class="fas fa-plus text-cyan-400 mb-2"></i><br><span class="text-xs">Add Content</span>
+            </button>
+            <button onclick="clearAllData()" class="bg-red-900/30 p-4 rounded-xl hover:bg-red-900/50">
+                <i class="fas fa-trash text-red-500 mb-2"></i><br><span class="text-xs">Clear All</span>
+            </button>
         </div>
     </div>
 
-    <section id="adminPanel" class="max-w-xl mx-auto mt-8 admin-only">
-        <div class="glass p-6 rounded-3xl border-2 border-dashed border-cyan-500/50 bg-cyan-500/5">
-            <h3 class="text-center font-bold text-cyan-400 mb-4"><i class="fas fa-lock-open mr-2"></i> ADMIN UPLOAD PANEL</h3>
-            <div class="grid grid-cols-3 gap-3">
-                <label class="flex flex-col items-center p-4 bg-slate-800 rounded-2xl cursor-pointer hover:bg-slate-700">
-                    <i class="fas fa-image text-green-400 mb-1"></i><span class="text-[10px]">Image</span>
-                    <input type="file" class="hidden" accept="image/*" onchange="uploadFile(this, 'image')">
-                </label>
-                <label class="flex flex-col items-center p-4 bg-slate-800 rounded-2xl cursor-pointer hover:bg-slate-700">
-                    <i class="fas fa-video text-blue-400 mb-1"></i><span class="text-[10px]">Video</span>
-                    <input type="file" class="hidden" accept="video/*" onchange="uploadFile(this, 'video')">
-                </label>
-                <label class="flex flex-col items-center p-4 bg-slate-800 rounded-2xl cursor-pointer hover:bg-slate-700">
-                    <i class="fas fa-file-code text-yellow-400 mb-1"></i><span class="text-[10px]">Files</span>
-                    <input type="file" class="hidden" onchange="uploadFile(this, 'file')">
-                </label>
-            </div>
-        </div>
-    </section>
-
-    <div class="max-w-xl mx-auto mt-10">
-        <h3 class="text-xl font-bold mb-4 flex items-center"><i class="fas fa-th-large mr-2 text-cyan-400"></i> My Gallery</h3>
-        <div id="gallery" class="grid grid-cols-1 gap-4">
-            </div>
+    <div class="max-w-xl mx-auto mt-8">
+        <h3 class="text-xl font-bold mb-4"><i class="fas fa-th-large mr-2 text-cyan-400"></i> My Gallery</h3>
+        <div id="gallery" class="grid grid-cols-1 gap-6"></div>
     </div>
 
     <script>
-        // ১. অ্যাডমিন চেক করার পাসওয়ার্ড (তুমি চাইলে পরিবর্তন করতে পারো)
+        let db;
+        const request = indexedDB.open("MinhajDB", 1);
+
+        request.onupgradeneeded = e => {
+            db = e.target.result;
+            db.createObjectStore("files", { keyPath: "id", autoIncrement: true });
+        };
+
+        request.onsuccess = e => {
+            db = e.target.result;
+            displayFiles();
+        };
+
         function checkAdmin() {
-            const pass = prompt("অ্যাডমিন পাসওয়ার্ড দিন:");
-            if (pass === "minhaj786") { // তোমার গোপন পাসওয়ার্ড
-                alert("স্বাগতম মিনহাজ! এখন আপনি আপলোড করতে পারবেন।");
+            if (prompt("পাসওয়ার্ড দিন:") === "minhaj786") {
                 document.getElementById('adminPanel').style.display = 'block';
-            } else {
-                alert("ভুল পাসওয়ার্ড! আপনি সাধারণ ইউজার হিসেবে সাইটটি দেখছেন।");
             }
         }
 
-        // ২. ফাইল আপলোড ফাংশন
-        function uploadFile(input, type) {
+        async function processFile(input) {
             const file = input.files[0];
             if (!file) return;
 
+            const reader = new FileReader();
+            reader.onload = e => {
+                const transaction = db.transaction(["files"], "readwrite");
+                transaction.objectStore("files").add({
+                    name: file.name,
+                    type: file.type,
+                    data: e.target.result,
+                    date: new Date().toLocaleString()
+                });
+                transaction.oncomplete = () => {
+                    displayFiles();
+                    input.value = '';
+                };
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function displayFiles() {
             const gallery = document.getElementById('gallery');
-            const url = URL.createObjectURL(file);
-            let contentHTML = '';
+            gallery.innerHTML = '';
+            const store = db.transaction("files").objectStore("files");
+            
+            store.openCursor(null, "prev").onsuccess = e => {
+                const cursor = e.target.result;
+                if (cursor) {
+                    const item = cursor.value;
+                    let mediaHTML = item.type.includes('image') ? 
+                        `<img src="${item.data}" class="w-full rounded-xl">` :
+                        `<video src="${item.data}" controls class="w-full rounded-xl"></video>`;
+                    
+                    if (!item.type.includes('image') && !item.type.includes('video')) {
+                        mediaHTML = `<div class="p-6 bg-slate-800 rounded-xl flex justify-between">
+                            <span>${item.name}</span>
+                            <a href="${item.data}" download="${item.name}" class="text-cyan-400 font-bold">Download</a>
+                        </div>`;
+                    }
 
-            if (type === 'image') {
-                contentHTML = `<img src="${url}" class="w-full h-auto rounded-xl">`;
-            } else if (type === 'video') {
-                contentHTML = `<video src="${url}" controls class="w-full rounded-xl"></video>`;
-            } else {
-                contentHTML = `<div class="p-6 bg-slate-800 rounded-xl flex items-center justify-between">
-                                <div class="flex items-center"><i class="fas fa-file-alt text-2xl mr-3 text-cyan-400"></i>
-                                <span class="text-sm truncate w-40">${file.name}</span></div>
-                                <a href="${url}" download="${file.name}" class="text-cyan-400 font-bold">Download</a>
-                               </div>`;
+                    gallery.innerHTML += `<div class="glass p-3 rounded-2xl animate-fade">
+                        ${mediaHTML}
+                        <div class="mt-2 flex justify-between text-[10px] text-gray-500 px-2">
+                            <span>${item.date}</span>
+                            <button onclick="deleteItem(${item.id})" class="text-red-500">DELETE</button>
+                        </div>
+                    </div>`;
+                    cursor.continue();
+                }
+            };
+        }
+
+        function deleteItem(id) {
+            if(confirm("মুছে ফেলবেন?")) {
+                db.transaction(["files"], "readwrite").objectStore("files").delete(id).onsuccess = displayFiles;
             }
+        }
 
-            const card = `
-                <div class="glass p-3 rounded-2xl mb-4">
-                    ${contentHTML}
-                    <div class="flex justify-between items-center mt-2 px-1">
-                        <span class="text-[10px] text-gray-500 uppercase font-black">${type}</span>
-                        <button onclick="this.parentElement.parentElement.remove()" class="text-red-500 text-xs admin-only" style="display:block">Delete</button>
-                    </div>
-                </div>`;
-            gallery.insertAdjacentHTML('afterbegin', card);
+        function clearAllData() {
+            if(confirm("সব ডাটা মুছে যাবে! আপনি কি নিশ্চিত?")) {
+                db.transaction(["files"], "readwrite").objectStore("files").clear().onsuccess = displayFiles;
+            }
         }
     </script>
 </body>
