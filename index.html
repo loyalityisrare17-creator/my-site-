@@ -3,93 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ConnectPlus | Modern Social Platform</title>
+    <title>Pro Profile & Media Center</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { background-color: #0f172a; color: white; transition: 0.3s; }
-        .glass-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
-        .post-card { transition: transform 0.3s ease; }
-        .post-card:hover { transform: translateY(-5px); }
-        input, textarea { background: #1e293b !important; border: 1px solid #334155 !important; color: white !important; }
+        body { background: #0f172a; color: white; scroll-behavior: smooth; }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); }
+        .gradient-text { background: linear-gradient(90deg, #00d4ff, #007aff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade { animation: fadeIn 0.5s ease forwards; }
     </style>
 </head>
-<body class="font-sans">
+<body class="p-4 md:p-8">
 
-    <nav class="sticky top-0 z-50 glass-card px-4 py-3 flex justify-between items-center shadow-lg">
-        <h1 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">ConnectPlus</h1>
-        <div class="flex items-center gap-5">
-            <i class="fas fa-home text-xl cursor-pointer hover:text-cyan-400"></i>
-            <i class="fas fa-bell text-xl cursor-pointer hover:text-cyan-400"></i>
-            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 border-2 border-white cursor-pointer overflow-hidden">
-                <img src="https://ui-avatars.com/api/?name=User" alt="Profile">
-            </div>
+    <header class="max-w-5xl mx-auto flex justify-between items-center mb-10 glass p-5 rounded-2xl animate-fade">
+        <h1 class="text-2xl font-bold gradient-text">MyProCenter</h1>
+        <div class="text-right">
+            <div id="clock" class="text-xl font-mono text-cyan-400">00:00:00 PM</div>
+            <div class="text-xs text-gray-400">Dhaka, Bangladesh</div>
         </div>
-    </nav>
+    </header>
 
-    <main class="max-w-4xl mx-auto mt-8 px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <main class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
         
-        <div class="hidden md:block">
-            <div class="glass-card rounded-2xl p-6 text-center">
-                <div class="w-20 h-20 mx-auto rounded-full border-4 border-cyan-500 mb-4 overflow-hidden">
-                    <img id="displayImg" src="https://ui-avatars.com/api/?name=Guest" alt="User Avatar">
+        <section class="lg:col-span-1 space-y-6 animate-fade" style="animation-delay: 0.1s;">
+            <div class="glass p-6 rounded-3xl text-center relative overflow-hidden">
+                <div class="w-32 h-32 mx-auto rounded-full border-4 border-cyan-500 p-1 mb-4 overflow-hidden group relative">
+                    <img id="profilePreview" src="https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff" class="w-full h-full object-cover rounded-full">
+                    <label class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 cursor-pointer transition">
+                        <i class="fas fa-camera text-white"></i>
+                        <input type="file" id="imgUpload" class="hidden" accept="image/*">
+                    </label>
                 </div>
-                <h2 id="displayName" class="text-xl font-bold">Guest User</h2>
-                <p id="displayBio" class="text-gray-400 text-sm mb-4">Web Developer & AI Enthusiast</p>
-                <div class="flex justify-center gap-4 border-t border-slate-700 pt-4">
-                    <a href="#" class="text-blue-400 hover:text-blue-300"><i class="fab fa-facebook text-xl"></i></a>
-                    <button class="bg-cyan-600 hover:bg-cyan-500 px-4 py-1 rounded-full text-xs">Edit Profile</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="md:col-span-2 space-y-6">
-            
-            <div class="glass-card rounded-2xl p-5 shadow-xl">
-                <div class="flex gap-4 mb-4">
-                    <div class="w-12 h-12 rounded-full bg-slate-700 flex-shrink-0"></div>
-                    <textarea class="w-full rounded-xl p-3 outline-none resize-none h-20" placeholder="What's on your mind?"></textarea>
-                </div>
-                <div class="flex justify-between items-center border-t border-slate-700 pt-4">
-                    <div class="flex gap-4 text-gray-400">
-                        <label class="cursor-pointer hover:text-green-400"><i class="fas fa-image mr-1"></i> Photo<input type="file" class="hidden"></label>
-                        <label class="cursor-pointer hover:text-blue-400"><i class="fas fa-video mr-1"></i> Video<input type="file" class="hidden"></label>
-                        <label class="cursor-pointer hover:text-yellow-400"><i class="fas fa-file-archive mr-1"></i> File/APK<input type="file" class="hidden"></label>
-                    </div>
-                    <button class="bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-2 rounded-xl font-bold hover:opacity-90 transition">Post</button>
-                </div>
-            </div>
-
-            <div class="post-card glass-card rounded-2xl overflow-hidden shadow-lg">
-                <div class="p-4 flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-cyan-500"></div>
-                    <div>
-                        <h4 class="font-bold">Rakib Hasan</h4>
-                        <span class="text-xs text-gray-500">2 hours ago</span>
-                    </div>
-                </div>
-                <div class="px-4 pb-3">
-                    <p class="text-slate-300">Just finished my new personal AI assistant project! Check out the UI. 🔥</p>
-                </div>
-                <img src="https://images.unsplash.com/photo-1614850523296-d8c1af93d400?auto=format&fit=crop&w=800" class="w-full object-cover max-h-96" alt="Post Image">
+                <h2 id="userName" class="text-2xl font-bold edit-text" contenteditable="true">আপনার নাম লিখুন</h2>
+                <p id="userBio" class="text-gray-400 text-sm mt-2 px-4 edit-text" contenteditable="true">আপনার Bio এখানে লিখুন...</p>
                 
-                <div class="p-4 flex justify-between border-t border-slate-700">
-                    <button class="flex items-center gap-2 hover:text-cyan-400"><i class="far fa-thumbs-up"></i> Like</button>
-                    <button class="flex items-center gap-2 hover:text-cyan-400"><i class="far fa-comment"></i> Comment</button>
-                    <button class="flex items-center gap-2 hover:text-cyan-400"><i class="fas fa-share"></i> Share</button>
+                <div class="mt-6 flex flex-col gap-3">
+                    <div class="flex items-center bg-slate-800 rounded-xl px-3 py-2">
+                        <i class="fab fa-facebook text-blue-500 mr-3"></i>
+                        <input type="text" id="fbLink" placeholder="Facebook Profile Link" class="bg-transparent outline-none text-sm w-full">
+                    </div>
+                    <button onclick="saveProfile()" class="bg-gradient-to-r from-cyan-500 to-blue-600 py-3 rounded-xl font-bold hover:scale-105 transition">Save Profile</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="lg:col-span-2 space-y-8 animate-fade" style="animation-delay: 0.2s;">
+            
+            <div class="glass p-6 rounded-3xl border-dashed border-2 border-cyan-500/30">
+                <h3 class="text-lg font-semibold mb-4 flex items-center"><i class="fas fa-cloud-upload-alt mr-2 text-cyan-400"></i> Upload Content</h3>
+                <div class="grid grid-cols-3 gap-4">
+                    <label class="flex flex-col items-center p-4 bg-slate-800 rounded-2xl cursor-pointer hover:bg-slate-700 transition">
+                        <i class="fas fa-image text-green-400 mb-2"></i>
+                        <span class="text-xs">Image</span>
+                        <input type="file" class="hidden" accept="image/*" onchange="handleFileUpload(this, 'image')">
+                    </label>
+                    <label class="flex flex-col items-center p-4 bg-slate-800 rounded-2xl cursor-pointer hover:bg-slate-700 transition">
+                        <i class="fas fa-video text-blue-400 mb-2"></i>
+                        <span class="text-xs">Video</span>
+                        <input type="file" class="hidden" accept="video/*" onchange="handleFileUpload(this, 'video')">
+                    </label>
+                    <label class="flex flex-col items-center p-4 bg-slate-800 rounded-2xl cursor-pointer hover:bg-slate-700 transition">
+                        <i class="fas fa-file-zipper text-yellow-400 mb-2"></i>
+                        <span class="text-xs">Files</span>
+                        <input type="file" class="hidden" onchange="handleFileUpload(this, 'file')">
+                    </label>
                 </div>
             </div>
 
-        </div>
+            <div class="space-y-4">
+                <h3 class="text-xl font-bold flex items-center"><i class="fas fa-th-large mr-2 text-cyan-400"></i> My Gallery</h3>
+                <div id="gallery" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    </div>
+            </div>
+        </section>
     </main>
 
-    <div class="md:hidden fixed bottom-0 w-full glass-card py-4 flex justify-around border-t border-slate-700">
-        <i class="fas fa-home text-cyan-400"></i>
-        <i class="fas fa-search"></i>
-        <i class="fas fa-plus-circle text-2xl"></i>
-        <i class="fas fa-user"></i>
-        <i class="fas fa-cog"></i>
-    </div>
+    <script>
+        // 1. Live Watch System
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('clock').innerText = now.toLocaleTimeString();
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
 
+        // 2. Profile Logic
+        document.getElementById('imgUpload').onchange = e => {
+            const file = e.target.files[0];
+            if (file) document.getElementById('profilePreview').src = URL.createObjectURL(file);
+        }
+
+        function saveProfile() {
+            const name = document.getElementById('userName').innerText;
+            const bio = document.getElementById('userBio').innerText;
+            const fb = document.getElementById('fbLink').value;
+            localStorage.setItem('userProfile', JSON.stringify({name, bio, fb}));
+            alert("Profile Saved Locally! (Database integration needed for permanent save)");
+        }
+
+        // 3. File Upload & Display Logic
+        function handleFileUpload(input, type) {
+            const file = input.files[0];
+            if (!file) return;
+
+            const gallery = document.getElementById('gallery');
+            const url = URL.createObjectURL(file);
+            let contentHTML = '';
+
+            if (type === 'image') {
+                contentHTML = `<img src="${url}" class="w-full h-48 object-cover rounded-xl">`;
+            } else if (type === 'video') {
+                contentHTML = `<video src="${url}" controls class="w-full h-48 rounded-xl"></video>`;
+            } else {
+                contentHTML = `<div class="h-48 flex flex-col items-center justify-center bg-slate-800 rounded-xl">
+                                <i class="fas fa-file-alt text-4xl mb-2 text-cyan-400"></i>
+                                <p class="text-xs px-2 truncate w-full text-center">${file.name}</p>
+                               </div>`;
+            }
+
+            const card = `
+                <div class="glass p-3 rounded-2xl animate-fade">
+                    ${contentHTML}
+                    <div class="mt-3 flex justify-between items-center">
+                        <span class="text-xs text-gray-400 uppercase font-bold">${type}</span>
+                        <a href="${url}" download="${file.name}" class="text-cyan-400 hover:text-cyan-300 text-sm">
+                            <i class="fas fa-download"></i> Download
+                        </a>
+                    </div>
+                </div>
+            `;
+            gallery.insertAdjacentHTML('afterbegin', card);
+        }
+
+        // Load saved profile on startup
+        window.onload = () => {
+            const saved = JSON.parse(localStorage.getItem('userProfile'));
+            if (saved) {
+                document.getElementById('userName').innerText = saved.name;
+                document.getElementById('userBio').innerText = saved.bio;
+                document.getElementById('fbLink').value = saved.fb;
+            }
+        };
+    </script>
 </body>
 </html>
