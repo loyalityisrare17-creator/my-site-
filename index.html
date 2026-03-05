@@ -3,107 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pro Profile & Media Center</title>
+    <title>Minhaj | Pro Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { background: #0f172a; color: white; scroll-behavior: smooth; }
+        body { background: #0f172a; color: white; font-family: 'Segoe UI', sans-serif; }
         .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); }
-        .gradient-text { background: linear-gradient(90deg, #00d4ff, #007aff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-fade { animation: fadeIn 0.5s ease forwards; }
+        .admin-only { display: none; } /* শুরুতে আপলোড বক্স লুকিয়ে থাকবে */
+        .gradient-btn { background: linear-gradient(90deg, #00d4ff, #007aff); transition: 0.3s; }
+        .gradient-btn:hover { opacity: 0.9; transform: scale(1.02); }
     </style>
 </head>
-<body class="p-4 md:p-8">
+<body class="p-4 md:p-8 pb-20">
 
-    <header class="max-w-5xl mx-auto flex justify-between items-center mb-10 glass p-5 rounded-2xl animate-fade">
-        <h1 class="text-2xl font-bold gradient-text">MyProCenter</h1>
-        <div class="text-right">
-            <div id="clock" class="text-xl font-mono text-cyan-400">00:00:00 PM</div>
-            <div class="text-xs text-gray-400">Dhaka, Bangladesh</div>
+    <div class="max-w-xl mx-auto glass p-8 rounded-3xl text-center shadow-2xl animate-fade">
+        <div class="w-28 h-28 mx-auto rounded-full border-4 border-cyan-500 p-1 mb-4 overflow-hidden shadow-lg">
+            <img id="profilePreview" src="https://ui-avatars.com/api/?name=Minhaj&background=00d4ff&color=fff" class="w-full h-full object-cover rounded-full">
         </div>
-    </header>
-
-    <main class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <h2 id="userName" class="text-3xl font-bold mb-1">Minhaj</h2>
+        <p id="userBio" class="text-gray-400 text-sm mb-6 px-4">এখন আর কতটুকু চিনো?? সময় আসতে দাও আরো চিনবা 🥷</p>
         
-        <section class="lg:col-span-1 space-y-6 animate-fade" style="animation-delay: 0.1s;">
-            <div class="glass p-6 rounded-3xl text-center relative overflow-hidden">
-                <div class="w-32 h-32 mx-auto rounded-full border-4 border-cyan-500 p-1 mb-4 overflow-hidden group relative">
-                    <img id="profilePreview" src="https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff" class="w-full h-full object-cover rounded-full">
-                    <label class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 cursor-pointer transition">
-                        <i class="fas fa-camera text-white"></i>
-                        <input type="file" id="imgUpload" class="hidden" accept="image/*">
-                    </label>
-                </div>
-                <h2 id="userName" class="text-2xl font-bold edit-text" contenteditable="true">আপনার নাম লিখুন</h2>
-                <p id="userBio" class="text-gray-400 text-sm mt-2 px-4 edit-text" contenteditable="true">আপনার Bio এখানে লিখুন...</p>
-                
-                <div class="mt-6 flex flex-col gap-3">
-                    <div class="flex items-center bg-slate-800 rounded-xl px-3 py-2">
-                        <i class="fab fa-facebook text-blue-500 mr-3"></i>
-                        <input type="text" id="fbLink" placeholder="Facebook Profile Link" class="bg-transparent outline-none text-sm w-full">
-                    </div>
-                    <button onclick="saveProfile()" class="bg-gradient-to-r from-cyan-500 to-blue-600 py-3 rounded-xl font-bold hover:scale-105 transition">Save Profile</button>
-                </div>
-            </div>
-        </section>
+        <a href="https://www.facebook.com/chill.r.527967" target="_blank" class="inline-flex items-center bg-slate-800 hover:bg-slate-700 px-5 py-2 rounded-full text-sm mb-6 transition">
+            <i class="fab fa-facebook text-blue-500 mr-2"></i> Facebook Profile
+        </a>
 
-        <section class="lg:col-span-2 space-y-8 animate-fade" style="animation-delay: 0.2s;">
-            
-            <div class="glass p-6 rounded-3xl border-dashed border-2 border-cyan-500/30">
-                <h3 class="text-lg font-semibold mb-4 flex items-center"><i class="fas fa-cloud-upload-alt mr-2 text-cyan-400"></i> Upload Content</h3>
-                <div class="grid grid-cols-3 gap-4">
-                    <label class="flex flex-col items-center p-4 bg-slate-800 rounded-2xl cursor-pointer hover:bg-slate-700 transition">
-                        <i class="fas fa-image text-green-400 mb-2"></i>
-                        <span class="text-xs">Image</span>
-                        <input type="file" class="hidden" accept="image/*" onchange="handleFileUpload(this, 'image')">
-                    </label>
-                    <label class="flex flex-col items-center p-4 bg-slate-800 rounded-2xl cursor-pointer hover:bg-slate-700 transition">
-                        <i class="fas fa-video text-blue-400 mb-2"></i>
-                        <span class="text-xs">Video</span>
-                        <input type="file" class="hidden" accept="video/*" onchange="handleFileUpload(this, 'video')">
-                    </label>
-                    <label class="flex flex-col items-center p-4 bg-slate-800 rounded-2xl cursor-pointer hover:bg-slate-700 transition">
-                        <i class="fas fa-file-zipper text-yellow-400 mb-2"></i>
-                        <span class="text-xs">Files</span>
-                        <input type="file" class="hidden" onchange="handleFileUpload(this, 'file')">
-                    </label>
-                </div>
-            </div>
+        <div class="mt-4">
+            <button onclick="checkAdmin()" class="text-[10px] text-gray-600 hover:text-cyan-500 uppercase tracking-widest">Admin Access</button>
+        </div>
+    </div>
 
-            <div class="space-y-4">
-                <h3 class="text-xl font-bold flex items-center"><i class="fas fa-th-large mr-2 text-cyan-400"></i> My Gallery</h3>
-                <div id="gallery" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    </div>
+    <section id="adminPanel" class="max-w-xl mx-auto mt-8 admin-only">
+        <div class="glass p-6 rounded-3xl border-2 border-dashed border-cyan-500/50 bg-cyan-500/5">
+            <h3 class="text-center font-bold text-cyan-400 mb-4"><i class="fas fa-lock-open mr-2"></i> ADMIN UPLOAD PANEL</h3>
+            <div class="grid grid-cols-3 gap-3">
+                <label class="flex flex-col items-center p-4 bg-slate-800 rounded-2xl cursor-pointer hover:bg-slate-700">
+                    <i class="fas fa-image text-green-400 mb-1"></i><span class="text-[10px]">Image</span>
+                    <input type="file" class="hidden" accept="image/*" onchange="uploadFile(this, 'image')">
+                </label>
+                <label class="flex flex-col items-center p-4 bg-slate-800 rounded-2xl cursor-pointer hover:bg-slate-700">
+                    <i class="fas fa-video text-blue-400 mb-1"></i><span class="text-[10px]">Video</span>
+                    <input type="file" class="hidden" accept="video/*" onchange="uploadFile(this, 'video')">
+                </label>
+                <label class="flex flex-col items-center p-4 bg-slate-800 rounded-2xl cursor-pointer hover:bg-slate-700">
+                    <i class="fas fa-file-code text-yellow-400 mb-1"></i><span class="text-[10px]">Files</span>
+                    <input type="file" class="hidden" onchange="uploadFile(this, 'file')">
+                </label>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
+
+    <div class="max-w-xl mx-auto mt-10">
+        <h3 class="text-xl font-bold mb-4 flex items-center"><i class="fas fa-th-large mr-2 text-cyan-400"></i> My Gallery</h3>
+        <div id="gallery" class="grid grid-cols-1 gap-4">
+            </div>
+    </div>
 
     <script>
-        // 1. Live Watch System
-        function updateClock() {
-            const now = new Date();
-            document.getElementById('clock').innerText = now.toLocaleTimeString();
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-
-        // 2. Profile Logic
-        document.getElementById('imgUpload').onchange = e => {
-            const file = e.target.files[0];
-            if (file) document.getElementById('profilePreview').src = URL.createObjectURL(file);
+        // ১. অ্যাডমিন চেক করার পাসওয়ার্ড (তুমি চাইলে পরিবর্তন করতে পারো)
+        function checkAdmin() {
+            const pass = prompt("অ্যাডমিন পাসওয়ার্ড দিন:");
+            if (pass === "minhaj786") { // তোমার গোপন পাসওয়ার্ড
+                alert("স্বাগতম মিনহাজ! এখন আপনি আপলোড করতে পারবেন।");
+                document.getElementById('adminPanel').style.display = 'block';
+            } else {
+                alert("ভুল পাসওয়ার্ড! আপনি সাধারণ ইউজার হিসেবে সাইটটি দেখছেন।");
+            }
         }
 
-        function saveProfile() {
-            const name = document.getElementById('userName').innerText;
-            const bio = document.getElementById('userBio').innerText;
-            const fb = document.getElementById('fbLink').value;
-            localStorage.setItem('userProfile', JSON.stringify({name, bio, fb}));
-            alert("Profile Saved Locally! (Database integration needed for permanent save)");
-        }
-
-        // 3. File Upload & Display Logic
-        function handleFileUpload(input, type) {
+        // ২. ফাইল আপলোড ফাংশন
+        function uploadFile(input, type) {
             const file = input.files[0];
             if (!file) return;
 
@@ -112,39 +80,27 @@
             let contentHTML = '';
 
             if (type === 'image') {
-                contentHTML = `<img src="${url}" class="w-full h-48 object-cover rounded-xl">`;
+                contentHTML = `<img src="${url}" class="w-full h-auto rounded-xl">`;
             } else if (type === 'video') {
-                contentHTML = `<video src="${url}" controls class="w-full h-48 rounded-xl"></video>`;
+                contentHTML = `<video src="${url}" controls class="w-full rounded-xl"></video>`;
             } else {
-                contentHTML = `<div class="h-48 flex flex-col items-center justify-center bg-slate-800 rounded-xl">
-                                <i class="fas fa-file-alt text-4xl mb-2 text-cyan-400"></i>
-                                <p class="text-xs px-2 truncate w-full text-center">${file.name}</p>
+                contentHTML = `<div class="p-6 bg-slate-800 rounded-xl flex items-center justify-between">
+                                <div class="flex items-center"><i class="fas fa-file-alt text-2xl mr-3 text-cyan-400"></i>
+                                <span class="text-sm truncate w-40">${file.name}</span></div>
+                                <a href="${url}" download="${file.name}" class="text-cyan-400 font-bold">Download</a>
                                </div>`;
             }
 
             const card = `
-                <div class="glass p-3 rounded-2xl animate-fade">
+                <div class="glass p-3 rounded-2xl mb-4">
                     ${contentHTML}
-                    <div class="mt-3 flex justify-between items-center">
-                        <span class="text-xs text-gray-400 uppercase font-bold">${type}</span>
-                        <a href="${url}" download="${file.name}" class="text-cyan-400 hover:text-cyan-300 text-sm">
-                            <i class="fas fa-download"></i> Download
-                        </a>
+                    <div class="flex justify-between items-center mt-2 px-1">
+                        <span class="text-[10px] text-gray-500 uppercase font-black">${type}</span>
+                        <button onclick="this.parentElement.parentElement.remove()" class="text-red-500 text-xs admin-only" style="display:block">Delete</button>
                     </div>
-                </div>
-            `;
+                </div>`;
             gallery.insertAdjacentHTML('afterbegin', card);
         }
-
-        // Load saved profile on startup
-        window.onload = () => {
-            const saved = JSON.parse(localStorage.getItem('userProfile'));
-            if (saved) {
-                document.getElementById('userName').innerText = saved.name;
-                document.getElementById('userBio').innerText = saved.bio;
-                document.getElementById('fbLink').value = saved.fb;
-            }
-        };
     </script>
 </body>
 </html>
